@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      title="msg://qlikSponsorDetailView.title"
+      focusComponent="form">
+    <data>
+        <collection class="com.company.demo.entity.QlikServer" id="qlikServersDc">
+            <fetchPlan extends="_base"/>
+            <loader id="qlikServersDl">
+                <query>
+                    <![CDATA[select e from QlikServer e  ]]>
+                </query>
+            </loader>
+        </collection>
+        <instance id="qlikSponsorDc"
+                  class="com.company.demo.entity.QlikSponsor">
+            <fetchPlan extends="_base">
+                <property name="server" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+    </facets>
+    <actions>
+        <action id="saveAction" type="detail_saveClose"/>
+        <action id="closeAction" type="detail_close"/>
+    </actions>
+    <layout>
+        <formLayout id="form" dataContainer="qlikSponsorDc">
+            <textField id="sponsorNameField" property="sponsorName"/>
+            <entityComboBox property="server" id="serverField"/>
+            <!--            <entityComboBox id="serverField" property="server" itemsContainer="qlikServersDc">-->
+<!--                <actions>-->
+<!--                    <action id="entityClear" type="entity_clear"/>-->
+<!--                </actions>-->
+<!--            </entityComboBox>-->
+        </formLayout>
+        <hbox id="detailActions">
+            <button id="saveAndCloseBtn" action="saveAction"/>
+            <button id="closeBtn" action="closeAction"/>
+        </hbox>
+    </layout>
+</view>

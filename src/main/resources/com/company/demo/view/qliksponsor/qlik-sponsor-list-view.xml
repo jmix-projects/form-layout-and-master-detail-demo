@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      xmlns:c="http://jmix.io/schema/flowui/jpql-condition"
+      title="msg://qlikSponsorListView.title"
+      focusComponent="qlikSponsorsDataGrid">
+    <data readOnly="true">
+        <collection id="qlikSponsorsDc"
+                    class="com.company.demo.entity.QlikSponsor">
+            <fetchPlan extends="_base">
+                <property name="server" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader id="qlikSponsorsDl">
+                <query>
+                    <![CDATA[select e from QlikSponsor e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <urlQueryParameters>
+            <genericFilter component="genericFilter"/>
+            <pagination component="pagination"/>
+        </urlQueryParameters>
+    </facets>
+    <actions>
+        <action id="selectAction" type="lookup_select"/>
+        <action id="discardAction" type="lookup_discard"/>
+    </actions>
+    <layout>
+        <genericFilter id="genericFilter"
+                       dataLoader="qlikSponsorsDl">
+            <properties include=".*"/>
+        </genericFilter>
+        <hbox id="buttonsPanel" classNames="buttons-panel">
+            <button id="createBtn" action="qlikSponsorsDataGrid.create"/>
+            <button id="editBtn" action="qlikSponsorsDataGrid.edit"/>
+            <button id="removeBtn" action="qlikSponsorsDataGrid.remove"/>
+            <simplePagination id="pagination" dataLoader="qlikSponsorsDl"/>
+        </hbox>
+        <dataGrid id="qlikSponsorsDataGrid"
+                  width="100%"
+                  minHeight="20em"
+                  dataContainer="qlikSponsorsDc">
+            <actions>
+                <action id="create" type="list_create"/>
+                <action id="edit" type="list_edit"/>
+                <action id="remove" type="list_remove"/>
+            </actions>
+            <columns>
+                <column property="sponsorName"/>
+                <column property="server"/>
+            </columns>
+        </dataGrid>
+        <hbox id="lookupActions" visible="false">
+            <button id="selectBtn" action="selectAction"/>
+            <button id="discardBtn" action="discardAction"/>
+        </hbox>
+    </layout>
+</view>

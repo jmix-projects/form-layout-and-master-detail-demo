@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1" author="demo">
+        <createTable tableName="QLIK_SPONSOR">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_QLIK_SPONSOR"/>
+            </column>
+            <column name="VERSION" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SPONSOR_NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SERVER_ID" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="2" author="demo">
+        <createIndex indexName="IDX_QLIK_SPONSOR_SERVER" tableName="QLIK_SPONSOR">
+            <column name="SERVER_ID"/>
+        </createIndex>
+
+        <addForeignKeyConstraint baseColumnNames="SERVER_ID" baseTableName="QLIK_SPONSOR"
+                                 constraintName="FK_QLIK_SPONSOR_ON_SERVER" referencedColumnNames="ID"
+                                 referencedTableName="QLIK_SERVER"/>
+    </changeSet>
+</databaseChangeLog>
