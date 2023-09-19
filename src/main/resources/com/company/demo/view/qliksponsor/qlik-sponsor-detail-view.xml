@@ -28,19 +28,23 @@
     </actions>
     <layout>
         <formLayout id="form" dataContainer="qlikSponsorDc">
-            <textField id="sponsorNameField" property="sponsorName"/>
-            <textField id="userLimitField" property="userLimit"/>
-            <textField id="tmpUserLimitField" property="tmpUserLimit"/>
-            <textField id="devLimitField" property="devLimit"/>
-            <textField id="tmpDevLimiField" property="tmpDevLimi"/>
-            <entityComboBox id="serverField" property="server" itemsContainer="qlikServersDc">
+            <textField id="sponsorNameField" property="sponsorName" colspan="6"/>
+            <textField id="userLimitField" property="userLimit" colspan="3"/>
+            <textField id="tmpUserLimitField" property="tmpUserLimit" colspan="3"/>
+            <textField id="devLimitField" property="devLimit" colspan="3"/>
+            <textField id="tmpDevLimiField" property="tmpDevLimi" colspan="3"/>
+            <entityComboBox id="serverField" property="server" itemsContainer="qlikServersDc" colspan="2">
                 <actions>
                     <action id="entityClear" type="entity_clear"/>
                 </actions>
             </entityComboBox>
-            <textField id="segmentField" property="segment"/>
-            <textField id="costCenterField" property="costCenter"/>
-            <textArea id="commentField" property="comment"/>
+            <textField id="segmentField" property="segment" colspan="2"/>
+            <textField id="costCenterField" property="costCenter" colspan="2"/>
+            <textArea id="commentField" property="comment" colspan="6"/>
+            <responsiveSteps>
+                <responsiveStep minWidth="0em" columns="1"/>
+                <responsiveStep minWidth="50em" columns="6"/>
+            </responsiveSteps>
         </formLayout>
         <hbox id="detailActions">
             <button id="saveAndCloseBtn" action="saveAction"/>
