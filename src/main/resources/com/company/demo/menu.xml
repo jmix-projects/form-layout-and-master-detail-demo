@@ -5,6 +5,7 @@
         <item view="User.list" title="msg://com.company.demo.view.user/UserListView.title"/>
         <item view="QlikServer.list" title="msg://com.company.demo.view.qlikserver/qlikServerListView.title"/>
         <item view="QlikSponsor.list" title="msg://com.company.demo.view.qliksponsor/qlikSponsorListView.title"/>
+        <item view="QlikUser.list" title="msg://com.company.demo.view.qlikuser/qlikUserListView.title"/>
     </menu>
 
 </menu-config>

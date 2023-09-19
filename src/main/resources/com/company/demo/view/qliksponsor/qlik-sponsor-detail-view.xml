@@ -29,12 +29,18 @@
     <layout>
         <formLayout id="form" dataContainer="qlikSponsorDc">
             <textField id="sponsorNameField" property="sponsorName"/>
-            <entityComboBox property="server" id="serverField"/>
-            <!--            <entityComboBox id="serverField" property="server" itemsContainer="qlikServersDc">-->
-<!--                <actions>-->
-<!--                    <action id="entityClear" type="entity_clear"/>-->
-<!--                </actions>-->
-<!--            </entityComboBox>-->
+            <textField id="userLimitField" property="userLimit"/>
+            <textField id="tmpUserLimitField" property="tmpUserLimit"/>
+            <textField id="devLimitField" property="devLimit"/>
+            <textField id="tmpDevLimiField" property="tmpDevLimi"/>
+            <entityComboBox id="serverField" property="server" itemsContainer="qlikServersDc">
+                <actions>
+                    <action id="entityClear" type="entity_clear"/>
+                </actions>
+            </entityComboBox>
+            <textField id="segmentField" property="segment"/>
+            <textField id="costCenterField" property="costCenter"/>
+            <textArea id="commentField" property="comment"/>
         </formLayout>
         <hbox id="detailActions">
             <button id="saveAndCloseBtn" action="saveAction"/>

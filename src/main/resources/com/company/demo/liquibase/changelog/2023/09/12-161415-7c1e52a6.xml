@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1" author="demo">
+        <createTable tableName="QLIK_LICENSE">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_QLIK_LICENSE"/>
+            </column>
+            <column name="VERSION" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="USER_ID" type="UUID"/>
+            <column name="SPONSOR_ID" type="UUID"/>
+            <column name="EXP_DATE" type="DATE"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="2" author="demo">
+        <createIndex indexName="IDX_QLIK_LICENSE_SPONSOR" tableName="QLIK_LICENSE">
+            <column name="SPONSOR_ID"/>
+        </createIndex>
+
+        <addForeignKeyConstraint baseColumnNames="SPONSOR_ID" baseTableName="QLIK_LICENSE"
+                                 constraintName="FK_QLIK_LICENSE_ON_SPONSOR" referencedColumnNames="ID"
+                                 referencedTableName="QLIK_SPONSOR"/>
+    </changeSet>
+    <changeSet id="3" author="demo">
+        <createIndex indexName="IDX_QLIK_LICENSE_USER" tableName="QLIK_LICENSE">
+            <column name="USER_ID"/>
+        </createIndex>
+
+        <addForeignKeyConstraint baseColumnNames="USER_ID" baseTableName="QLIK_LICENSE"
+                                 constraintName="FK_QLIK_LICENSE_ON_USER" referencedColumnNames="ID"
+                                 referencedTableName="QLIK_USER"/>
+    </changeSet>
+</databaseChangeLog>
