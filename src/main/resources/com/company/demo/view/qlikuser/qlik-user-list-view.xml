@@ -13,11 +13,21 @@
                 </query>
             </loader>
         </collection>
+        <collection class="com.company.demo.entity.QlikLicense" id="qlikLicensesDc">
+            <fetchPlan extends="_base">
+                <property name="sponsor" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader id="qlikLicensesDl">
+                <query>
+                    <![CDATA[select e from QlikLicense e
+                    where e.user = :container_qlikUsersDc  ]]>
+                </query>
+            </loader>
+        </collection>
     </data>
     <facets>
         <dataLoadCoordinator auto="true"/>
         <urlQueryParameters>
-            <genericFilter component="genericFilter"/>
             <pagination component="pagination"/>
         </urlQueryParameters>
     </facets>
@@ -26,32 +36,65 @@
         <action id="discardAction" type="lookup_discard"/>
     </actions>
     <layout>
-        <genericFilter id="genericFilter"
-                       dataLoader="qlikUsersDl">
-            <properties include=".*"/>
-        </genericFilter>
-        <hbox id="buttonsPanel" classNames="buttons-panel">
-            <button id="createBtn" action="qlikUsersDataGrid.create"/>
-            <button id="editBtn" action="qlikUsersDataGrid.edit"/>
-            <button id="removeBtn" action="qlikUsersDataGrid.remove"/>
-            <simplePagination id="pagination" dataLoader="qlikUsersDl"/>
-        </hbox>
-        <dataGrid id="qlikUsersDataGrid"
-                  width="100%"
-                  minHeight="20em"
-                  dataContainer="qlikUsersDc">
-            <actions>
-                <action id="create" type="list_create"/>
-                <action id="edit" type="list_edit"/>
-                <action id="remove" type="list_remove"/>
-            </actions>
-            <columns>
-                <column property="userName"/>
-            </columns>
-        </dataGrid>
-        <hbox id="lookupActions" visible="false">
-            <button id="selectBtn" action="selectAction"/>
-            <button id="discardBtn" action="discardAction"/>
-        </hbox>
+        <formLayout>
+            <vbox>
+                <h4 text="Users"/>
+                <hbox id="buttonsPanel" classNames="buttons-panel">
+                    <button id="createBtn" action="qlikUsersDataGrid.create"/>
+                    <button id="editBtn" action="qlikUsersDataGrid.edit"/>
+                    <button id="removeBtn" action="qlikUsersDataGrid.remove"/>
+                    <simplePagination id="pagination" dataLoader="qlikUsersDl"/>
+                </hbox>
+                <dataGrid dataContainer="qlikUsersDc" id="qlikUsersDataGrid" minHeight="20em" width="100%">
+                    <actions>
+                        <action id="create" text="msg:///actions.Create" type="list_create">
+                            <properties>
+                                <property name="openMode" value="DIALOG"/>
+                            </properties>
+                        </action>
+                        <action id="edit" text="msg:///actions.Edit" type="list_edit">
+                            <properties>
+                                <property name="openMode" value="DIALOG"/>
+                            </properties>
+                        </action>
+                        <action id="remove" text="msg:///actions.Remove" type="list_remove"/>
+                    </actions>
+                    <columns>
+                        <column property="userName"/>
+                    </columns>
+                </dataGrid>
+            </vbox>
+            <vbox>
+                <h4 text="Licenses"/>
+                <hbox>
+                    <button action="qlikLicensesDataGrid.create"/>
+                    <button action="qlikLicensesDataGrid.edit"/>
+                    <button action="qlikLicensesDataGrid.remove"/>
+                </hbox>
+                <dataGrid width="100%" dataContainer="qlikLicensesDc" id="qlikLicensesDataGrid">
+                    <actions>
+                        <action id="create" type="list_create" enabled="false">
+                            <properties>
+                                <property name="openMode" value="DIALOG"/>
+                            </properties>
+                        </action>
+                        <action id="edit" type="list_edit">
+                            <properties>
+                                <property name="openMode" value="DIALOG"/>
+                            </properties>
+                        </action>
+                        <action id="remove" type="list_remove"/>
+                    </actions>
+                    <columns>
+                        <column property="expDate"/>
+                        <column property="sponsor"/>
+                    </columns>
+                </dataGrid>
+            </vbox>
+        </formLayout>
+        <!--        <hbox id="lookupActions" visible="false">-->
+<!--            <button id="selectBtn" action="selectAction"/>-->
+<!--            <button id="discardBtn" action="discardAction"/>-->
+<!--        </hbox>-->
     </layout>
 </view>

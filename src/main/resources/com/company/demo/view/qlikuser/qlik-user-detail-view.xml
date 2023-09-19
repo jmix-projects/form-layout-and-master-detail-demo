@@ -3,17 +3,6 @@
       title="msg://qlikUserDetailView.title"
       focusComponent="form">
     <data>
-        <collection class="com.company.demo.entity.QlikLicense" id="qlikLicensesDc">
-            <fetchPlan extends="_base">
-                <property name="sponsor" fetchPlan="_base"/>
-            </fetchPlan>
-            <loader id="qlikLicensesDl">
-                <query>
-                    <![CDATA[select e from QlikLicense e
-                    where e.user = :container_qlikUserDc  ]]>
-                </query>
-            </loader>
-        </collection>
         <instance id="qlikUserDc"
                   class="com.company.demo.entity.QlikUser">
             <fetchPlan extends="_base"/>
@@ -31,26 +20,6 @@
         <formLayout id="form" dataContainer="qlikUserDc">
             <textField id="userNameField" property="userName"/>
         </formLayout>
-        <hbox>
-            <button id="createBtn" action="qlikLicensesDataGrid.create"/>
-            <button action="qlikLicensesDataGrid.edit"/>
-            <button action="qlikLicensesDataGrid.remove"/>
-        </hbox>
-        <dataGrid width="100%" dataContainer="qlikLicensesDc" id="qlikLicensesDataGrid">
-            <actions>
-                <action id="create" type="list_create">
-                    <properties>
-                        <property name="openMode" value="DIALOG"/>
-                    </properties>
-                </action>
-                <action id="edit" type="list_edit"/>
-                <action id="remove" type="list_remove"/>
-            </actions>
-            <columns>
-                <column property="expDate"/>
-                <column property="sponsor"/>
-            </columns>
-        </dataGrid>
         <hbox id="detailActions">
             <button id="saveAndCloseBtn" action="saveAction"/>
             <button id="closeBtn" action="closeAction"/>
