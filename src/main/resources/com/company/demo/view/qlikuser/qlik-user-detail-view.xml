@@ -31,7 +31,11 @@
         <formLayout id="form" dataContainer="qlikUserDc">
             <textField id="userNameField" property="userName"/>
         </formLayout>
-        <button id="createBtn" action="qlikLicensesDataGrid.create"/>
+        <hbox>
+            <button id="createBtn" action="qlikLicensesDataGrid.create"/>
+            <button action="qlikLicensesDataGrid.edit"/>
+            <button action="qlikLicensesDataGrid.remove"/>
+        </hbox>
         <dataGrid width="100%" dataContainer="qlikLicensesDc" id="qlikLicensesDataGrid">
             <actions>
                 <action id="create" type="list_create">
